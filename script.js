@@ -1,7 +1,18 @@
 
 const GameBoardModule = (() => {
-    let gameBoard = ['X', 'O', 'X', 'O', 'X', 'O'];
+    let gameBoard = [];
+    const rows = 3;
+    const columns = 3;
 
+    for (let i = 0; i < rows; i++) {
+        gameBoard[i] = [];
+        for (let j = 0; j < columns; j++) {
+            gameBoard[i].push('');
+        }
+    }
+
+    console.log(gameBoard);
+    
     const displayArray = () => {
         const displayVar = document.querySelector('.game-container');
             gameBoard.forEach((element) => {
