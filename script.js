@@ -1,26 +1,28 @@
 
-const GameBoardModule = (() => {
-    let gameBoard = [];
+const boardModule = (() => {
+    let board = [];
     const rows = 3;
     const columns = 3;
 
     for (let i = 0; i < rows; i++) {
-        gameBoard[i] = [];
+        board[i] = [];
         for (let j = 0; j < columns; j++) {
-            gameBoard[i].push('');
+            board[i].push('');
         }
     }
 
-    console.log(gameBoard);
+    console.log(board);
+
+    const getBoard = () => board;
     
     const displayArray = () => {
         const displayVar = document.querySelector('.game-container');
-            gameBoard.forEach((element) => {
+            board.forEach((element) => {
                 displayVar.innerHTML += element;
             })
         // const displayVar = document.querySelector('.game-container');
-        // for (let i = 0; i < gameBoard.length; i++) {
-        //     displayVar.innerHTML += gameBoard[i];
+        // for (let i = 0; i < board.length; i++) {
+        //     displayVar.innerHTML += board[i];
         // }
     }
 
@@ -44,4 +46,4 @@ const playerFactory = (name, marker) => {
 const player1 = playerFactory('John', 'X');
 console.log(player1.getName());
 
-GameBoardModule.displayArray();
+boardModule.displayArray();
