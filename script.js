@@ -1,4 +1,4 @@
-
+// Module for the game board to store array of board and place marker
 const gameboardModule = (() => {
     let board = ['','','',
                  '','','',
@@ -17,6 +17,7 @@ const gameboardModule = (() => {
 
 })();
 
+// Player factory to store player objects
 const playersFactory = (name, marker) => {
     const getName  = () => name;
     const getMarker = () => marker;
@@ -24,19 +25,34 @@ const playersFactory = (name, marker) => {
     return {getName, getMarker};
 };
 
+// Module to handle the game logic
 const gameControllerModule = (() => {
     // place player markers
     // switch player turns
     // tell which player to take turn
+    const playerOne = playersFactory('Bob', 'X');
+    const playerTwo = playersFactory('Tom', 'O');
 
+    const makeTurn = () => {
+        console.log(`It's ${playerOne.getName()}'s turn`);
+    }
 
-
+    
+    const playboard = gameboardModule;
+    console.log('im inside module', playboard.getBoard());
+    makeTurn();
+    playboard.placeMarker(4, playerOne.getMarker());
+    console.log(playboard.getBoard());
 
 })();
 
 
-const player1 = playersFactory(prompt(getName()), prompt(getMarker()));
-console.log(player1);
+// const player1 = playersFactory(prompt("name "), prompt("marker "));
+// console.log(player1.getName(), player1.getMarker());
+
+// const playboard = gameboardModule;
+// playboard.placeMarker(2, player1.getMarker());
+// console.log(playboard.getBoard());
 
 // const items = [
 //     { name: 'Widget', price: 19.99 },
