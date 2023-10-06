@@ -33,11 +33,25 @@ const gameControllerModule = (() => {
     const playerOne = playersFactory('Bob', 'X');
     const playerTwo = playersFactory('Tom', 'O');
 
+    const players = [
+        {
+            name: playerOne.getName(),
+            marker: playerOne.getMarker()
+        },
+        {
+            name: playerTwo.getName(),
+            marker: playerTwo.getMarker()
+        }
+    ];
+    
+
     const makeTurn = () => {
-        console.log(`It's ${playerOne.getName()}'s turn`);
+        console.log(`It's ${players[1].name}'s turn`);
     }
 
     
+    
+
     const playboard = gameboardModule;
     console.log('im inside module', playboard.getBoard());
     makeTurn();
