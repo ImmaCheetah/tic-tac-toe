@@ -55,26 +55,20 @@ const gameControllerModule = (() => {
 
 })();
 
-const playboard = gameboardModule;
-console.log(gameControllerModule.getCurrentPlayer()); // This works but when adding const to the function in the module it does not
-console.log(playboard.currentPlayer = 'jon');
-console.log(playboard.currentPlayer);
 
+const game = gameControllerModule;
+console.log(game.getCurrentPlayer());
+game.makeTurn();
 
-
-// console.log(playboard.getBoard());
-// playboard.makeTurn();
-// playboard.placeMarker(4, playerOne.getMarker());
-// console.log(playboard.getBoard());
-
-
-
-// const player1 = playersFactory(prompt("name "), prompt("marker "));
-// console.log(player1.getName(), player1.getMarker());
+game.placeMarker(4, playerOne.getMarker());
+console.log(game.getBoard());
 
 // const playboard = gameboardModule;
-// playboard.placeMarker(2, player1.getMarker());
-// console.log(playboard.getBoard());
+// console.log(gameControllerModule.getCurrentPlayer());
+// console.log(playboard.currentPlayer = 'jon');
+// console.log(playboard.currentPlayer);
+
+
 
 // const items = [
 //     { name: 'Widget', price: 19.99 },
