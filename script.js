@@ -30,6 +30,11 @@ const gameControllerModule = (() => {
     // place player markers
     // switch player turns
     // tell which player to take turn
+
+    // const {getBoard} = gameboardModule();
+    let getBoard = gameboardModule.getBoard;
+    
+
     const playerOne = playersFactory('Bob', 'X');
     const playerTwo = playersFactory('Tom', 'O');
 
@@ -51,17 +56,40 @@ const gameControllerModule = (() => {
         console.log(`It's ${players[1].name}'s turn`);
     }
 
-    return {getCurrentPlayer, makeTurn};
+    return {getBoard, getCurrentPlayer, makeTurn};
 
 })();
 
+// this is how gameboard will look like after the IIFE is done running
+// const gameBoardImmediate = {getBoard, placeMarker}
+
+// // modify this to return an object with a property containing the value of gameBoardImmediate.getBoard
+// const genericFactory = () => {
+//   let genericVariable = "generic";
+//   const getGeneric = () => genericVariable;
+
+//   let getBoard = gameBoardImmediate.getBoard;
+
+//   return {getGeneric, getBoard};
+// }
+
+
+// let generic = genericFactory()
+// console.log(generic) // {getGeneric,getBoard} 
 
 const game = gameControllerModule;
-console.log(game.getCurrentPlayer());
-game.makeTurn();
-
-game.placeMarker(4, playerOne.getMarker());
 console.log(game.getBoard());
+// console.log(game.getCurrentPlayer());
+// game.makeTurn();
+
+
+
+// game.getBoard();
+
+// game.placeMarker(4, playerOne.getMarker());
+// console.log(game.getBoard());
+
+
 
 // const playboard = gameboardModule;
 // console.log(gameControllerModule.getCurrentPlayer());
