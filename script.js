@@ -1,10 +1,10 @@
 // Module for the game board to store array of board and place marker
 const gameboardModule = (() => {
-    let board = ['','','',
-                 '','','',
-                 '','',''];
+    let board = ['0','1','2',
+                 '3','4','5',
+                 '6','7','8'];
 
-    const getBoard = () => console.log(board);
+    const getBoard = () => board;
 
     const placeMarker = (index, player) => {
         board[index] = player;
@@ -55,13 +55,15 @@ const gameControllerModule = (() => {
 
     const makeTurn = () => {
         
-        placeMarker(prompt('where'), currentPlayer.marker);
+        placeMarker(prompt('where'), getCurrentPlayer().marker);
         switchPlayer();
+        
         printNewRound();
+        checkForWin();
     }
 
     const switchPlayer = () => {
-        if (currentPlayer === players[1]) {
+        if (getCurrentPlayer() === players[1]) {
             currentPlayer = players[0];
         } else {
             currentPlayer = players[1];
@@ -69,18 +71,29 @@ const gameControllerModule = (() => {
     }
 
     const printNewRound = () => {
-        getBoard();
-        console.log(`It's ${currentPlayer.name}'s turn`);
+        console.log(getBoard());
+        console.log(`It's ${getCurrentPlayer().name}'s turn`);
     }
 
     printNewRound();
 
-    return {getBoard, placeMarker, getCurrentPlayer, makeTurn};
+    const checkForWin = () => {
+       if (getBoard().toString() === '0,O,2,3,4,5,6,7,8') {
+        console.log('win');
+       } else {
+        return;
+       }
+    console.log(getBoard().toString());
+    }
+
+    return {getCurrentPlayer, makeTurn};
 
 })();
 
 
 const game = gameControllerModule;
+
+console.log(game.makeTurn());
 console.log(game.makeTurn());
 
 
