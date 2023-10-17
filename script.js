@@ -78,12 +78,15 @@ const gameControllerModule = (() => {
     printNewRound();
 
     const checkForWin = () => {
+        let boardString = getBoard().toString().replace(/\,/g,'');
+        console.log(boardString);
+
+
        if (getBoard().toString() === '0,O,2,3,4,5,6,7,8') {
         console.log('win');
        } else {
         return;
        }
-    console.log(getBoard().toString());
     }
 
     return {getCurrentPlayer, makeTurn};
