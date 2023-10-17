@@ -57,6 +57,18 @@ const gameControllerModule = (() => {
         console.log(`It's ${currentPlayer.name}'s turn`);
         placeMarker(prompt('where'), currentPlayer.marker);
         console.log(getBoard());
+        switchPlayer();
+        console.log(currentPlayer);
+        switchPlayer();
+        console.log(currentPlayer);
+    }
+
+    const switchPlayer = () => {
+        if (currentPlayer === players[1]) {
+            currentPlayer = players[0];
+        } else {
+            currentPlayer = players[1];
+        }
     }
 
     return {getBoard, placeMarker, getCurrentPlayer, makeTurn};
