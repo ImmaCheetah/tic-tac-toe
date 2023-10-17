@@ -4,7 +4,7 @@ const gameboardModule = (() => {
                  '','','',
                  '','',''];
 
-    const getBoard = () => board;
+    const getBoard = () => console.log(board);
 
     const placeMarker = (index, player) => {
         board[index] = player;
@@ -54,13 +54,10 @@ const gameControllerModule = (() => {
     const getCurrentPlayer = () => currentPlayer;
 
     const makeTurn = () => {
-        console.log(`It's ${currentPlayer.name}'s turn`);
+        
         placeMarker(prompt('where'), currentPlayer.marker);
-        console.log(getBoard());
         switchPlayer();
-        console.log(currentPlayer);
-        switchPlayer();
-        console.log(currentPlayer);
+        printNewRound();
     }
 
     const switchPlayer = () => {
@@ -71,13 +68,19 @@ const gameControllerModule = (() => {
         }
     }
 
+    const printNewRound = () => {
+        getBoard();
+        console.log(`It's ${currentPlayer.name}'s turn`);
+    }
+
+    printNewRound();
+
     return {getBoard, placeMarker, getCurrentPlayer, makeTurn};
 
 })();
 
 
 const game = gameControllerModule;
-console.log(game.getBoard());
 console.log(game.makeTurn());
 
 
