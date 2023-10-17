@@ -50,11 +50,13 @@ const gameControllerModule = (() => {
         }
     ];
     
-    let currentPlayer = players[0];
+    let currentPlayer = players[1];
     const getCurrentPlayer = () => currentPlayer;
 
     const makeTurn = () => {
-        console.log(`It's ${players[1].name}'s turn`);
+        console.log(`It's ${currentPlayer.name}'s turn`);
+        placeMarker(prompt('where'), currentPlayer.marker);
+        console.log(getBoard());
     }
 
     return {getBoard, placeMarker, getCurrentPlayer, makeTurn};
@@ -64,7 +66,7 @@ const gameControllerModule = (() => {
 
 const game = gameControllerModule;
 console.log(game.getBoard());
-console.log(game.placeMarker(2, "Player"));
+console.log(game.makeTurn());
 
 
 
