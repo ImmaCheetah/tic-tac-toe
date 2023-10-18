@@ -78,15 +78,37 @@ const gameControllerModule = (() => {
     printNewRound();
 
     const checkForWin = () => {
+        
+        // Go through each index from argument and add to result
+        function getLetters(str, ...args){
+            let result = '';
+            args.forEach(index => {
+              result += str[index];
+            })
+            return result;
+        }
+        
+        
+
+
         let boardString = getBoard().toString().replace(/\,/g,'');
         console.log(boardString.substring(3,6));
         console.log(boardString.substring(6,9));
+
+        
+        console.log(getLetters(boardString, 0, 3, 6));
         
         if (boardString.substring(0,3) === 'XXX' || boardString.substring(0,3) === 'OOO') {
             console.log('win');
         } else if (boardString.substring(3,6) === 'XXX' || boardString.substring(3,6) === 'OOO') {
             console.log('win');
         } else if (boardString.substring(3,6) === 'XXX' || boardString.substring(3,6) === 'OOO') {
+            console.log('win');
+        } else if (getLetters(boardString, 0, 3, 6) === 'XXX' || getLetters(boardString, 0, 3, 6) === 'OOO') {
+            console.log('win');
+        } else if (getLetters(boardString, 1, 4, 7) === 'XXX' || getLetters(boardString, 1, 4, 7) === 'OOO') {
+            console.log('win');
+        } else if (getLetters(boardString, 2, 5, 8) === 'XXX' || getLetters(boardString, 2, 5, 8) === 'OOO') {
             console.log('win');
         }
 
