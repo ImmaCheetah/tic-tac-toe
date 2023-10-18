@@ -79,14 +79,25 @@ const gameControllerModule = (() => {
 
     const checkForWin = () => {
         let boardString = getBoard().toString().replace(/\,/g,'');
-        console.log(boardString);
+        console.log(boardString.substring(3,6));
+        console.log(boardString.substring(6,9));
+        
+        if (boardString.substring(0,3) === 'XXX' || boardString.substring(0,3) === 'OOO') {
+            console.log('win');
+        } else if (boardString.substring(3,6) === 'XXX' || boardString.substring(3,6) === 'OOO') {
+            console.log('win');
+        } else if (boardString.substring(3,6) === 'XXX' || boardString.substring(3,6) === 'OOO') {
+            console.log('win');
+        }
 
-
-       if (getBoard().toString() === '0,O,2,3,4,5,6,7,8') {
-        console.log('win');
-       } else {
-        return;
-       }
+        // if (getBoard().toString() === '0,O,2,3,4,5,6,7,8') {
+        // console.log('win');
+        // } else {
+        //     return;
+        // }
+        // ['0','1','2',
+        // '3','4','5',
+        // '6','7','8'];
     }
 
     return {getCurrentPlayer, makeTurn};
@@ -98,6 +109,7 @@ const game = gameControllerModule;
 
 console.log(game.makeTurn());
 console.log(game.makeTurn());
+
 
 
 
