@@ -1,8 +1,8 @@
 // Module for the game board to store array of board and place marker
 const gameboardModule = (() => {
-    let board = ['','','',
-                 '','','',
-                 '','',''];
+    let board = ['1','1','1',
+                 '1','1','1',
+                 '1','1','1'];
 
     const getBoard = () => board;
 
@@ -53,45 +53,22 @@ const gameControllerModule = (() => {
     let currentPlayer = players[1];
     const getCurrentPlayer = () => currentPlayer;
 
-    const makeTurn = () => {
+    const makeTurn = (index) => {
         console.log(getBoard().toString().replace(/\,/g,''));
-        // let answer = prompt('where you want it boss');
-        
-        
-        // if (getBoard().toString().replace(/\,/g,'').charAt(answer) === '') {
-        //     placeMarker(answer, getCurrentPlayer().marker);
-        //     switchPlayer();
-        //     printNewRound();
-        //     checkForWin();  
-        // } else if (getBoard().toString().replace(/\,/g,'').charAt(answer) !== '') {
-        //     console.log('Cant put it there');
-        //     placeMarker(prompt('pick new spot'), getCurrentPlayer().marker);
-        // } else {
-        //     console.log('Error');
-        // }
-
-        for (let i = 0; i < 10; i++) {
-            let answer = prompt('where you want it boss');
-            if (getBoard().toString().replace(/\,/g,'1').charAt(answer) === '') {
-                placeMarker(answer, getCurrentPlayer().marker);
-                switchPlayer();
-                printNewRound();
-                checkForWin();
-                i++;  
-            } else if (getBoard().toString().replace(/\,/g,'').charAt(answer) !== '') {
-                console.log('Cant put it there');
-                return;
-                // answer = prompt('gonna have to go somewhere else m8');
-                // placeMarker(answer, getCurrentPlayer().marker);
-                // i++;
-            }
+          
+        if (getBoard().toString().replace(/\,/g,'').charAt(index) === '1') {
+            placeMarker(index, getCurrentPlayer().marker);
+            switchPlayer();
+            printNewRound();
+            checkForWin();  
+        } else if (getBoard().toString().replace(/\,/g,'').charAt(index) !== '') {
+            console.log('Cant put it there');
+            // placeMarker(prompt('pick new spot'), getCurrentPlayer().marker);
+        } else {
+            console.log('Error');
         }
+
     }
-        // start loop
-        // prompt user where to place marker
-        // use answer to check if place is empty
-        // if empty, place marker, switch player, check win
-        // if not empty, prompt for new answer
 
     const switchPlayer = () => {
         if (getCurrentPlayer() === players[1]) {
@@ -151,7 +128,7 @@ const gameControllerModule = (() => {
 
 const game = gameControllerModule;
 
-console.log(game.makeTurn());
+// console.log(game.makeTurn());
 
 
 
