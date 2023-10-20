@@ -1,8 +1,8 @@
 // Module for the game board to store array of board and place marker
 const gameboardModule = (() => {
-    let board = ['1','1','1',
-                 '1','1','1',
-                 '1','1','1'];
+    let board = ['.','.','.',
+                 '.','.','.',
+                 '.','.','.'];
 
     const getBoard = () => board;
 
@@ -55,8 +55,9 @@ const gameControllerModule = (() => {
 
     const makeTurn = (index) => {
         console.log(getBoard().toString().replace(/\,/g,''));
+        console.log(getBoard().includes('.'));
           
-        if (getBoard().toString().replace(/\,/g,'').charAt(index) === '1') {
+        if (getBoard().toString().replace(/\,/g,'').charAt(index) === '.') {
             placeMarker(index, getCurrentPlayer().marker);
             switchPlayer();
             printNewRound();
@@ -79,7 +80,7 @@ const gameControllerModule = (() => {
     }
 
     const printNewRound = () => {
-        console.log(`It's ${getCurrentPlayer().name}'s turn`);
+        console.log(`It's ${getCurrentPlayer().name}'s (${getCurrentPlayer().marker}) turn`);
         console.log(getBoard());
         
     }
@@ -89,12 +90,18 @@ const gameControllerModule = (() => {
     const checkForWin = () => {
         
         // Go through each index from argument and add to result
-        function getLetters(str, ...args){
+        function getIndex(str, ...args) {
             let result = '';
             args.forEach(index => {
               result += str[index];
             })
             return result;
+        }
+
+        function checkFullBoard() {
+            if (!getBoard().includes('.')) {
+                console.log('Tie');
+            }
         }
         
         let boardString = getBoard().toString().replace(/\,/g,'');
@@ -105,18 +112,18 @@ const gameControllerModule = (() => {
             console.log('win');
         } else if (boardString.substring(3,6) === 'XXX' || boardString.substring(3,6) === 'OOO') {
             console.log('win');
-        } else if (getLetters(boardString, 0, 3, 6) === 'XXX' || getLetters(boardString, 0, 3, 6) === 'OOO') {
+        } else if (getIndex(boardString, 0, 3, 6) === 'XXX' || getIndex(boardString, 0, 3, 6) === 'OOO') {
             console.log('win');
-        } else if (getLetters(boardString, 1, 4, 7) === 'XXX' || getLetters(boardString, 1, 4, 7) === 'OOO') {
+        } else if (getIndex(boardString, 1, 4, 7) === 'XXX' || getIndex(boardString, 1, 4, 7) === 'OOO') {
             console.log('win');
-        } else if (getLetters(boardString, 2, 5, 8) === 'XXX' || getLetters(boardString, 2, 5, 8) === 'OOO') {
+        } else if (getIndex(boardString, 2, 5, 8) === 'XXX' || getIndex(boardString, 2, 5, 8) === 'OOO') {
             console.log('win');
-        } else if (getLetters(boardString, 0, 4, 8) === 'XXX' || getLetters(boardString, 0, 4, 8) === 'OOO') {
+        } else if (getIndex(boardString, 0, 4, 8) === 'XXX' || getIndex(boardString, 0, 4, 8) === 'OOO') {
             console.log('win');
-        } else if (getLetters(boardString, 2, 4, 6) === 'XXX' || getLetters(boardString, 2, 4, 6) === 'OOO') {
+        } else if (getIndex(boardString, 2, 4, 6) === 'XXX' || getIndex(boardString, 2, 4, 6) === 'OOO') {
             console.log('win');
         } else {
-            console.log('No win yet');
+            checkFullBoard();
         }
 
     }
