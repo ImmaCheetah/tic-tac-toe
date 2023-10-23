@@ -136,18 +136,15 @@ const screenControllerModule = (() => {
     
 
     const updateScreen = () => {
-        boardDiv.textContent = '';
+        // boardDiv.textContent = '';
 
         const board = game.getBoard();
         const activePlayer = game.getCurrentPlayer();
 
-        console.log(board);
-        console.log(activePlayer); 
+        turnDiv.textContent = `It's ${activePlayer.name}'s (${activePlayer.marker}) turn`;
     }
 
     updateScreen();
-
-    // game.updateScreen();
 
     // return {updateScreen};
     // use for each to go through board and create a grid cell with data attribute for each one
