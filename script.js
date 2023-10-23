@@ -142,12 +142,22 @@ const screenControllerModule = (() => {
         const activePlayer = game.getCurrentPlayer();
 
         turnDiv.textContent = `It's ${activePlayer.name}'s (${activePlayer.marker}) turn`;
+
+        // use for each to go through board and create a grid cell with data attribute for each one
+        board.forEach(function (value, index) {
+            const gridCell = document.createElement('button');
+            gridCell.classList.add('grid-cell');
+
+            gridCell.setAttribute('data-index', index);
+            
+            boardDiv.appendChild(gridCell);
+        })
     }
 
     updateScreen();
 
     // return {updateScreen};
-    // use for each to go through board and create a grid cell with data attribute for each one
+    
 })();
 
 
