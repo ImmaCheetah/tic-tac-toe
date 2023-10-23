@@ -1,8 +1,8 @@
 // Module for the game board to store array of board and place marker
 const gameboardModule = (() => {
-    let board = ['.','.','.',
-                 '.','.','.',
-                 '.','.','.'];
+    let board = ['','','',
+                 '','','',
+                 '','',''];
 
     const getBoard = () => board;
 
@@ -31,11 +31,9 @@ const gameControllerModule = (() => {
     // switch player turns
     // tell which player to take turn
 
-    
     let getBoard = gameboardModule.getBoard;
     let placeMarker = gameboardModule.placeMarker;
     
-
     const playerOne = playersFactory('Bob', 'O');
     const playerTwo = playersFactory('Tom', 'X');
 
@@ -54,15 +52,16 @@ const gameControllerModule = (() => {
     const getCurrentPlayer = () => currentPlayer;
 
     const makeTurn = (index) => {
-        console.log(getBoard().toString().replace(/\,/g,''));
-        console.log(getBoard().includes('.'));
-          
-        if (getBoard().toString().replace(/\,/g,'').charAt(index) === '.') {
+        // console.log(getBoard().includes(''));
+
+        tempArray = getBoard();
+
+        if (tempArray[index] === '') {
             placeMarker(index, getCurrentPlayer().marker);
             switchPlayer();
             printNewRound();
             checkForWin();  
-        } else if (getBoard().toString().replace(/\,/g,'').charAt(index) !== '') {
+        } else if (tempArray[index] !== '') {
             console.log('Cant put it there');
             // placeMarker(prompt('pick new spot'), getCurrentPlayer().marker);
         } else {
@@ -82,13 +81,11 @@ const gameControllerModule = (() => {
     const printNewRound = () => {
         console.log(`It's ${getCurrentPlayer().name}'s (${getCurrentPlayer().marker}) turn`);
         console.log(getBoard());
-        
     }
 
     printNewRound();
 
     const checkForWin = () => {
-        
         // Go through each index from argument and add to result
         function getIndex(str, ...args) {
             let result = '';
@@ -99,7 +96,7 @@ const gameControllerModule = (() => {
         }
 
         function checkFullBoard() {
-            if (!getBoard().includes('.')) {
+            if (!getBoard().includes('')) {
                 console.log('Tie');
             }
         }
@@ -110,7 +107,7 @@ const gameControllerModule = (() => {
             console.log('win');
         } else if (boardString.substring(3,6) === 'XXX' || boardString.substring(3,6) === 'OOO') {
             console.log('win');
-        } else if (boardString.substring(3,6) === 'XXX' || boardString.substring(3,6) === 'OOO') {
+        } else if (boardString.substring(6,9) === 'XXX' || boardString.substring(6,9) === 'OOO') {
             console.log('win');
         } else if (getIndex(boardString, 0, 3, 6) === 'XXX' || getIndex(boardString, 0, 3, 6) === 'OOO') {
             console.log('win');
@@ -125,7 +122,6 @@ const gameControllerModule = (() => {
         } else {
             checkFullBoard();
         }
-
     }
 
     return {getCurrentPlayer, makeTurn};
