@@ -51,23 +51,23 @@ const gameControllerModule = (() => {
     let currentPlayer = players[1];
     const getCurrentPlayer = () => currentPlayer;
 
-    const makeTurn = (index) => {
-        // console.log(getBoard().includes(''));
+    const makeTurn = (index, e) => {
 
         tempArray = getBoard();
 
         if (tempArray[index] === '') {
+
+            e.target.textContent = getCurrentPlayer().marker; // comment out for app to work
             placeMarker(index, getCurrentPlayer().marker);
             switchPlayer();
             printNewRound();
             checkForWin();  
         } else if (tempArray[index] !== '') {
             console.log('Cant put it there');
-            // placeMarker(prompt('pick new spot'), getCurrentPlayer().marker);
         } else {
             console.log('Error');
         }
-
+        console.log(e.target);
     }
 
     const switchPlayer = () => {
@@ -133,16 +133,8 @@ const screenControllerModule = (() => {
     const turnDiv = document.querySelector('.turn');
     const boardDiv = document.querySelector('.board');
 
-    
-
-    const updateScreen = () => {
-        boardDiv.textContent = '';
-
+    const displayBoard = () => {
         const board = game.getBoard();
-        const activePlayer = game.getCurrentPlayer();
-
-        turnDiv.textContent = `It's ${activePlayer.name}'s (${activePlayer.marker}) turn`;
-
         // Go through each index of board array and create button with a class and data attribute of current index
         board.forEach(function (value, index) {
             const gridCell = document.createElement('button');
@@ -154,16 +146,27 @@ const screenControllerModule = (() => {
         })
     }
 
+    const updateScreen = () => {
+        // boardDiv.textContent = '';
+
+        
+        const activePlayer = game.getCurrentPlayer();
+
+        turnDiv.textContent = `It's ${activePlayer.name}'s (${activePlayer.marker}) turn`;
+
+        
+    }
+
     function clickGridCell(e) {
         const selectedGridCell = e.target.dataset.index;
 
-        game.makeTurn(selectedGridCell);
+        game.makeTurn(selectedGridCell, e);
         updateScreen();
     }
 
     boardDiv.addEventListener('click', clickGridCell);
-
-    updateScreen();
+    displayBoard();
+    // updateScreen();
 
     // return {updateScreen};
     
