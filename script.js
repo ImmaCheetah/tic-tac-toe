@@ -128,8 +128,13 @@ const gameControllerModule = (() => {
 
 })();
 
+const screenControllerModule = (() => {
+    const game = gameControllerModule;
 
-const game = gameControllerModule;
+    
+})();
+
+
 
 // console.log(game.makeTurn());
 
