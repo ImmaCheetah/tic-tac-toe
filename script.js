@@ -136,14 +136,14 @@ const screenControllerModule = (() => {
     
 
     const updateScreen = () => {
-        // boardDiv.textContent = '';
+        boardDiv.textContent = '';
 
         const board = game.getBoard();
         const activePlayer = game.getCurrentPlayer();
 
         turnDiv.textContent = `It's ${activePlayer.name}'s (${activePlayer.marker}) turn`;
 
-        // use for each to go through board and create a grid cell with data attribute for each one
+        // Go through each index of board array and create button with a class and data attribute of current index
         board.forEach(function (value, index) {
             const gridCell = document.createElement('button');
             gridCell.classList.add('grid-cell');
@@ -153,6 +153,15 @@ const screenControllerModule = (() => {
             boardDiv.appendChild(gridCell);
         })
     }
+
+    function clickGridCell(e) {
+        const selectedGridCell = e.target.dataset.index;
+
+        game.makeTurn(selectedGridCell);
+        updateScreen();
+    }
+
+    boardDiv.addEventListener('click', clickGridCell);
 
     updateScreen();
 
