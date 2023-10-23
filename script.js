@@ -124,14 +124,33 @@ const gameControllerModule = (() => {
         }
     }
 
-    return {getCurrentPlayer, makeTurn};
+    return {getCurrentPlayer, makeTurn, getBoard};
 
 })();
 
 const screenControllerModule = (() => {
     const game = gameControllerModule;
+    const turnDiv = document.querySelector('.turn');
+    const boardDiv = document.querySelector('.board');
 
     
+
+    const updateScreen = () => {
+        boardDiv.textContent = '';
+
+        const board = game.getBoard();
+        const activePlayer = game.getCurrentPlayer();
+
+        console.log(board);
+        console.log(activePlayer); 
+    }
+
+    updateScreen();
+
+    // game.updateScreen();
+
+    // return {updateScreen};
+    // use for each to go through board and create a grid cell with data attribute for each one
 })();
 
 
