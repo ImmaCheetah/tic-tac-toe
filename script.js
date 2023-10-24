@@ -33,20 +33,33 @@ const gameControllerModule = (() => {
 
     let getBoard = gameboardModule.getBoard;
     let placeMarker = gameboardModule.placeMarker;
-    
-    const playerOne = playersFactory('Bob', 'O');
-    const playerTwo = playersFactory('Tom', 'X');
 
-    const players = [
-        {
-            name: playerOne.getName(),
-            marker: playerOne.getMarker()
-        },
-        {
-            name: playerTwo.getName(),
-            marker: playerTwo.getMarker()
-        }
-    ];
+    // const playerOne = playersFactory('Bob', 'O');
+    // const playerTwo = playersFactory('Tom', 'X');
+    const players = null;
+    const createPlayers = (playerOneName, playerTwoName) => {
+        players = [
+            {
+                name: playerOneName,
+                marker: 'O'
+            },
+            {
+                name: playerTwoName,
+                marker: 'X'
+            }
+        ];
+
+    }
+    // const players = [
+    //     {
+    //         name: playerOne.getName(),
+    //         marker: playerOne.getMarker()
+    //     },
+    //     {
+    //         name: playerTwo.getName(),
+    //         marker: playerTwo.getMarker()
+    //     }
+    // ];
     
     let currentPlayer = players[1];
     const getCurrentPlayer = () => currentPlayer;
@@ -105,8 +118,6 @@ const gameControllerModule = (() => {
             }
         }
 
-        
-
         let boardString = getBoard().toString().replace(/\,/g,'');
         
         if (boardString.substring(0,3) === 'XXX' || boardString.substring(0,3) === 'OOO') {
@@ -138,7 +149,7 @@ const gameControllerModule = (() => {
         }
     }
 
-    return {getCurrentPlayer, makeTurn, getBoard};
+    return {getCurrentPlayer, makeTurn, getBoard, createPlayers};
 
 })();
 
@@ -146,7 +157,7 @@ const screenControllerModule = (() => {
     const game = gameControllerModule;
     const turnDiv = document.querySelector('.turn');
     const boardDiv = document.querySelector('.board');
-    const playerOne = document.getElementById('player-one');
+    const playerOne = document.getElementById('player-one'); // THESE GUYS, I can do playerOne.value
     const playerTwo = document.getElementById('player-two');
     const start = document.querySelector('.start');
     const reset = document.querySelector('.reset');
@@ -163,7 +174,6 @@ const screenControllerModule = (() => {
             
             boardDiv.appendChild(gridCell);
         })
-        
     }
 
     const updateScreen = () => {
@@ -171,6 +181,7 @@ const screenControllerModule = (() => {
         const activePlayer = game.getCurrentPlayer();
         turnDiv.textContent = `It's ${activePlayer.name}'s (${activePlayer.marker}) turn`;
     }
+
 
     function clickGridCell(e) {
         const selectedGridCell = e.target.dataset.index;
@@ -185,12 +196,8 @@ const screenControllerModule = (() => {
     updateScreen();
 
     // return {updateScreen};
-    
 })();
 
-
-
-// console.log(game.makeTurn());
 
 
 
