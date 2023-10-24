@@ -83,6 +83,13 @@ h1 {
     color: var(--main-text-clr);
 }
 
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
 .board {
     width: 300px;
     display: grid;

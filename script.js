@@ -175,6 +175,7 @@ const screenControllerModule = (() => {
     boardDiv.addEventListener('click', clickGridCell);
     
     displayBoard();
+    updateScreen();
 
     // return {updateScreen};
     
