@@ -44,6 +44,45 @@ table {
 	border-spacing: 0;
 }
 
+/* VARIABLES || */
+:root {
+    --primary-clr: #381d1f;
+    --header: #A50519;
+    --border-clr: #A50519;
+    --main-text-clr: rgb(255, 254, 254);
+    --bg: #faebd7;
+    --cards: rgb(254, 253, 253);
+    --light-txt-clr: rgb(148, 148, 148);
+}
+
+/* BASIC STYLING || */
+body {
+    background-color: var(--bg);
+    width: 100vw;
+    min-height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Aleo', serif;
+    font-family: 'Lato', sans-serif;
+}
+
+.header {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-clr);
+    font-weight: 700;
+    box-shadow: 5px 6px 13px -1px rgba(0,0,0,0.17);
+    gap: 50px;
+}
+
+h1 {
+    font-size: 72px;
+    color: var(--main-text-clr);
+}
+
 .board {
     width: 300px;
     display: grid;
@@ -58,3 +97,4 @@ table {
     font-size: 25px;
     color: black;
 }
+
