@@ -12,7 +12,21 @@
         <div class="header">
             <h1>Tic Tac Toe</h1>
         </div>
+        
         <div class="game-container">
+            <div class="players">
+                <p>Player One</p>
+                <label for="player-one"></label>
+                <input type="text" name="player-one" id="player-one" placeholder="Name" required>
+
+                <p>Player Two</p>
+                <label for="player-two"></label>
+                <input type="text" name="player-two" id="player-two" placeholder="Name" required>
+            </div>
+            <div class="buttons">
+                <button id="start">Start</button>
+                <button id="reset">Reset</button>
+            </div>
             <div class="turn"></div>
             <div class="board"></div>
             <div class="result"></div>
