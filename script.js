@@ -60,15 +60,15 @@ const gameControllerModule = (() => {
 
             e.target.textContent = getCurrentPlayer().marker; // comment out for app to work
             placeMarker(index, getCurrentPlayer().marker);
-            switchPlayer();
             printNewRound();
-            checkForWin();  
+            checkForWin();
+            switchPlayer();  
         } else if (tempArray[index] !== '.') {
             console.log('Cant put it there');
         } else {
             console.log('Error');
         }
-        console.log(e.target);
+        // console.log(e.target);
     }
 
     const switchPlayer = () => {
@@ -87,6 +87,8 @@ const gameControllerModule = (() => {
     printNewRound();
 
     const checkForWin = () => {
+
+        const resultDiv = document.querySelector('.result');
         // Go through each index from argument and add to result
         function getIndex(str, ...args) {
             let result = '';
@@ -97,31 +99,42 @@ const gameControllerModule = (() => {
         }
 
         function checkFullBoard() {
-            if (!getBoard().includes('')) {
+            if (!getBoard().includes('.')) {
                 console.log('Tie');
+                resultDiv.textContent = 'Tie!';
             }
         }
+
+        
 
         let boardString = getBoard().toString().replace(/\,/g,'');
         
         if (boardString.substring(0,3) === 'XXX' || boardString.substring(0,3) === 'OOO') {
+            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
             console.log('win');
         } else if (boardString.substring(3,6) === 'XXX' || boardString.substring(3,6) === 'OOO') {
+            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
             console.log('win');
         } else if (boardString.substring(6,9) === 'XXX' || boardString.substring(6,9) === 'OOO') {
+            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
             console.log('win');
         } else if (getIndex(boardString, 0, 3, 6) === 'XXX' || getIndex(boardString, 0, 3, 6) === 'OOO') {
+            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
             console.log('win');
         } else if (getIndex(boardString, 1, 4, 7) === 'XXX' || getIndex(boardString, 1, 4, 7) === 'OOO') {
+            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
             console.log('win');
         } else if (getIndex(boardString, 2, 5, 8) === 'XXX' || getIndex(boardString, 2, 5, 8) === 'OOO') {
+            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
             console.log('win');
         } else if (getIndex(boardString, 0, 4, 8) === 'XXX' || getIndex(boardString, 0, 4, 8) === 'OOO') {
+            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
             console.log('win');
         } else if (getIndex(boardString, 2, 4, 6) === 'XXX' || getIndex(boardString, 2, 4, 6) === 'OOO') {
+            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;            
             console.log('win');
         } else {
-            // checkFullBoard();
+            checkFullBoard();
         }
     }
 
@@ -162,7 +175,6 @@ const screenControllerModule = (() => {
     boardDiv.addEventListener('click', clickGridCell);
     
     displayBoard();
-    // updateScreen();
 
     // return {updateScreen};
     
