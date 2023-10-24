@@ -146,6 +146,11 @@ const screenControllerModule = (() => {
     const game = gameControllerModule;
     const turnDiv = document.querySelector('.turn');
     const boardDiv = document.querySelector('.board');
+    const playerOne = document.getElementById('player-one');
+    const playerTwo = document.getElementById('player-two');
+    const start = document.querySelector('.start');
+    const reset = document.querySelector('.reset');
+
 
     const displayBoard = () => {
         const board = game.getBoard();
@@ -158,6 +163,7 @@ const screenControllerModule = (() => {
             
             boardDiv.appendChild(gridCell);
         })
+        
     }
 
     const updateScreen = () => {
@@ -171,6 +177,7 @@ const screenControllerModule = (() => {
 
         game.makeTurn(selectedGridCell, e);
         updateScreen();
+        console.log(playerOne.value);
     }
     boardDiv.addEventListener('click', clickGridCell);
     
