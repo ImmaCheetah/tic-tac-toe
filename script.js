@@ -1,8 +1,8 @@
 // Module for the game board to store array of board and place marker
 const gameboardModule = (() => {
-    let board = ['','','',
-                 '','','',
-                 '','',''];
+    let board = ['.','.','.',
+                 '.','.','.',
+                 '.','.','.'];
 
     const getBoard = () => board;
 
@@ -54,15 +54,16 @@ const gameControllerModule = (() => {
     const makeTurn = (index, e) => {
 
         tempArray = getBoard();
+        
 
-        if (tempArray[index] === '') {
+        if (tempArray[index] === '.') {
 
             e.target.textContent = getCurrentPlayer().marker; // comment out for app to work
             placeMarker(index, getCurrentPlayer().marker);
             switchPlayer();
             printNewRound();
             checkForWin();  
-        } else if (tempArray[index] !== '') {
+        } else if (tempArray[index] !== '.') {
             console.log('Cant put it there');
         } else {
             console.log('Error');
@@ -100,7 +101,7 @@ const gameControllerModule = (() => {
                 console.log('Tie');
             }
         }
-        
+
         let boardString = getBoard().toString().replace(/\,/g,'');
         
         if (boardString.substring(0,3) === 'XXX' || boardString.substring(0,3) === 'OOO') {
@@ -120,7 +121,7 @@ const gameControllerModule = (() => {
         } else if (getIndex(boardString, 2, 4, 6) === 'XXX' || getIndex(boardString, 2, 4, 6) === 'OOO') {
             console.log('win');
         } else {
-            checkFullBoard();
+            // checkFullBoard();
         }
     }
 
@@ -148,13 +149,8 @@ const screenControllerModule = (() => {
 
     const updateScreen = () => {
         // boardDiv.textContent = '';
-
-        
         const activePlayer = game.getCurrentPlayer();
-
         turnDiv.textContent = `It's ${activePlayer.name}'s (${activePlayer.marker}) turn`;
-
-        
     }
 
     function clickGridCell(e) {
@@ -163,8 +159,8 @@ const screenControllerModule = (() => {
         game.makeTurn(selectedGridCell, e);
         updateScreen();
     }
-
     boardDiv.addEventListener('click', clickGridCell);
+    
     displayBoard();
     // updateScreen();
 
