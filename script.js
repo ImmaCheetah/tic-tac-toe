@@ -92,10 +92,10 @@ const gameControllerModule = (() => {
     }
 
     const switchPlayer = () => {
-        if (getCurrentPlayer() === players[1]) {
-            currentPlayer = players[0];
+        if (getCurrentPlayer() === currentPlayers[1]) {
+            currentPlayer = currentPlayers[0];
         } else {
-            currentPlayer = players[1];
+            currentPlayer = currentPlayers[1];
         }
     }
 
