@@ -34,22 +34,9 @@ const gameControllerModule = (() => {
     let getBoard = gameboardModule.getBoard;
     let placeMarker = gameboardModule.placeMarker;
 
-    // const playerOne = playersFactory('Bob', 'O');
+    // const playerOne = playersFactory('Bob', 'O'); 
     // const playerTwo = playersFactory('Tom', 'X');
-    const players = null;
-    const createPlayers = (playerOneName, playerTwoName) => {
-        players = [
-            {
-                name: playerOneName,
-                marker: 'O'
-            },
-            {
-                name: playerTwoName,
-                marker: 'X'
-            }
-        ];
 
-    }
     // const players = [
     //     {
     //         name: playerOne.getName(),
@@ -61,7 +48,27 @@ const gameControllerModule = (() => {
     //     }
     // ];
     
-    let currentPlayer = players[1];
+    const createPlayers = (name1, name2) => {
+        const playerOne = playersFactory(name1, 'O');
+        const playerTwo = playersFactory(name2, 'X');
+
+        const players = [
+            {
+                name: playerOne.getName(),
+                marker: playerOne.getMarker()
+            },
+            {
+                name: playerTwo.getName(),
+                marker: playerTwo.getMarker()
+            }
+        ];
+        return players;
+    }
+    // createPlayers('Jim', 'Jon');
+    let currentPlayers = createPlayers('Jim', 'Jon');
+    console.log(currentPlayers);
+
+    let currentPlayer = currentPlayers[1];
     const getCurrentPlayer = () => currentPlayer;
 
     const makeTurn = (index, e) => {
@@ -197,7 +204,3 @@ const screenControllerModule = (() => {
 
     // return {updateScreen};
 })();
-
-
-
-
