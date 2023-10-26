@@ -33,6 +33,8 @@ const gameControllerModule = (() => {
 
     let getBoard = gameboardModule.getBoard;
     let placeMarker = gameboardModule.placeMarker;
+
+    players = [];
     
     const createPlayers = (name1, name2) => {
         const playerOne = playersFactory(name1, 'O');
@@ -50,10 +52,9 @@ const gameControllerModule = (() => {
         ];
         return players;
     }
-    const playerOne = document.getElementById('player-one'); // temporary fix
+    const playerOne = document.getElementById('player-one'); 
     const playerTwo = document.getElementById('player-two');
     let currentPlayers = createPlayers(playerOne.value, playerTwo.value);
-    console.log(currentPlayers);
 
     let currentPlayer = currentPlayers[1];
     const getCurrentPlayer = () => currentPlayer;
@@ -152,8 +153,11 @@ const screenControllerModule = (() => {
     
     const start = document.querySelector('#start');
     const reset = document.querySelector('#reset');
-
     
+    
+    // console.log(currentPlayers);
+
+
     const displayBoard = () => {
         const board = game.getBoard();
         // Go through each index of board array and create button with a class and data attribute of current index
@@ -173,17 +177,19 @@ const screenControllerModule = (() => {
         turnDiv.textContent = `It's ${activePlayer.name}'s (${activePlayer.marker}) turn`;
     }
 
-    function clickGridCell(e) {
-        const selectedGridCell = e.target.dataset.index;
-
-        game.makeTurn(selectedGridCell, e);
-        updateScreen();
-        // console.log(playerOne.value);
-    }
-    boardDiv.addEventListener('click', clickGridCell);
+    
 
     start.addEventListener('click', function() {
         updateScreen();
+
+        function clickGridCell(e) {
+            const selectedGridCell = e.target.dataset.index;
+    
+            game.makeTurn(selectedGridCell, e);
+            updateScreen();
+            // console.log(playerOne.value);
+        }
+        boardDiv.addEventListener('click', clickGridCell);
     })
     
     displayBoard();
