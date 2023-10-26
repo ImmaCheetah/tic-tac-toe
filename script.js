@@ -33,20 +33,6 @@ const gameControllerModule = (() => {
 
     let getBoard = gameboardModule.getBoard;
     let placeMarker = gameboardModule.placeMarker;
-
-    // const playerOne = playersFactory('Bob', 'O'); 
-    // const playerTwo = playersFactory('Tom', 'X');
-
-    // const players = [
-    //     {
-    //         name: playerOne.getName(),
-    //         marker: playerOne.getMarker()
-    //     },
-    //     {
-    //         name: playerTwo.getName(),
-    //         marker: playerTwo.getMarker()
-    //     }
-    // ];
     
     const createPlayers = (name1, name2) => {
         const playerOne = playersFactory(name1, 'O');
@@ -64,8 +50,9 @@ const gameControllerModule = (() => {
         ];
         return players;
     }
-    // createPlayers('Jim', 'Jon');
-    let currentPlayers = createPlayers('Jim', 'Jon');
+    const playerOne = document.getElementById('player-one'); // temporary fix
+    const playerTwo = document.getElementById('player-two');
+    let currentPlayers = createPlayers(playerOne.value, playerTwo.value);
     console.log(currentPlayers);
 
     let currentPlayer = currentPlayers[1];
@@ -75,10 +62,9 @@ const gameControllerModule = (() => {
 
         tempArray = getBoard();
         
-
         if (tempArray[index] === '.') {
 
-            e.target.textContent = getCurrentPlayer().marker; // comment out for app to work
+            e.target.textContent = getCurrentPlayer().marker;
             placeMarker(index, getCurrentPlayer().marker);
             printNewRound();
             checkForWin();
@@ -88,7 +74,6 @@ const gameControllerModule = (() => {
         } else {
             console.log('Error');
         }
-        // console.log(e.target);
     }
 
     const switchPlayer = () => {
@@ -164,12 +149,11 @@ const screenControllerModule = (() => {
     const game = gameControllerModule;
     const turnDiv = document.querySelector('.turn');
     const boardDiv = document.querySelector('.board');
-    const playerOne = document.getElementById('player-one'); // THESE GUYS, I can do playerOne.value
-    const playerTwo = document.getElementById('player-two');
-    const start = document.querySelector('.start');
-    const reset = document.querySelector('.reset');
+    
+    const start = document.querySelector('#start');
+    const reset = document.querySelector('#reset');
 
-
+    
     const displayBoard = () => {
         const board = game.getBoard();
         // Go through each index of board array and create button with a class and data attribute of current index
@@ -189,18 +173,21 @@ const screenControllerModule = (() => {
         turnDiv.textContent = `It's ${activePlayer.name}'s (${activePlayer.marker}) turn`;
     }
 
-
     function clickGridCell(e) {
         const selectedGridCell = e.target.dataset.index;
 
         game.makeTurn(selectedGridCell, e);
         updateScreen();
-        console.log(playerOne.value);
+        // console.log(playerOne.value);
     }
     boardDiv.addEventListener('click', clickGridCell);
+
+    start.addEventListener('click', function() {
+        updateScreen();
+    })
     
     displayBoard();
-    updateScreen();
+    
 
     // return {updateScreen};
 })();
