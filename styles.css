@@ -67,6 +67,7 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+/* HEADER || */
 .header {
     height: 110px;
     display: flex;
@@ -83,6 +84,38 @@ h1 {
     color: var(--main-text-clr);
 }
 
+/* PLAYERS || */
+.players {
+    padding: 15px;
+}
+
+input {
+    padding: 5px;
+    appearance: none;
+    border: none;
+    font-size: 20px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+/* BUTTONS || */
+.buttons {
+    padding: 10px;
+}
+
+.buttons button {
+    appearance: none;
+    padding: 10px 15px;
+    background-color: var(--border-clr);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+/* BOARD || */
 .game-container {
     display: flex;
     flex-direction: column;
@@ -96,12 +129,29 @@ h1 {
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
     border: 1px solid black;
-
 }
 
 .grid-cell {
     border: 1px solid black; ;
-    font-size: 50px;
+    font-size: 70px;
+    font-weight: bold;
     color: black;
+    appearance: none;
+    background-color: var(--bg);
+    /* color: red; */
 }
 
+.turn, .result {
+    font-size: 25px;
+    color: var(--primary-clr);
+    font-weight: bold;
+    padding: 10px;
+}
+
+/* .grid-cell:nth-child(even) {
+    color: var(--primary-clr);
+}
+
+.grid-cell:nth-child(odd) {
+    color: var(--border-clr);
+} */

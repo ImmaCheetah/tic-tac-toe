@@ -177,8 +177,6 @@ const screenControllerModule = (() => {
         turnDiv.textContent = `It's ${activePlayer.name}'s (${activePlayer.marker}) turn`;
     }
 
-    
-
     start.addEventListener('click', function() {
         updateScreen();
 
@@ -194,6 +192,4 @@ const screenControllerModule = (() => {
     
     displayBoard();
     
-
-    // return {updateScreen};
 })();
