@@ -77,6 +77,15 @@ const gameControllerModule = (() => {
         }
     }
 
+    const clearBoard = () => {
+        tempArray = getBoard();
+
+        for (let i = 0; i < tempArray.length; i++) {
+            tempArray[i] = '.';
+        }
+        console.log(tempArray);
+    }
+
     const switchPlayer = () => {
         if (getCurrentPlayer() === currentPlayers[1]) {
             currentPlayer = currentPlayers[0];
@@ -142,7 +151,7 @@ const gameControllerModule = (() => {
         }
     }
 
-    return {getCurrentPlayer, makeTurn, getBoard, createPlayers};
+    return {getCurrentPlayer, makeTurn, getBoard, createPlayers, clearBoard};
 
 })();
 
@@ -188,6 +197,13 @@ const screenControllerModule = (() => {
             // console.log(playerOne.value);
         }
         boardDiv.addEventListener('click', clickGridCell);
+    })
+
+    reset.addEventListener('click', function() {
+        boardDiv.textContent = '';
+        turnDiv.textContent = '';
+        game.clearBoard();
+        displayBoard();
     })
     
     displayBoard();
