@@ -34,29 +34,20 @@ const gameControllerModule = (() => {
     let getBoard = gameboardModule.getBoard;
     let placeMarker = gameboardModule.placeMarker;
 
-    players = [];
+    // let players = null;
     
-    const createPlayers = (name1, name2) => {
-        const playerOne = playersFactory(name1, 'O');
-        const playerTwo = playersFactory(name2, 'X');
+    const createPlayers = (playerOne, playerTwo) => {
+        const player1 = playersFactory(playerOne, 'O');
+        const player2 = playersFactory(playerTwo, 'X');
 
-        const players = [
-            {
-                name: playerOne.getName(),
-                marker: playerOne.getMarker()
-            },
-            {
-                name: playerTwo.getName(),
-                marker: playerTwo.getMarker()
-            }
-        ];
+        let players = [player1, player2];
         return players;
     }
-    const playerOne = document.getElementById('player-one'); 
-    const playerTwo = document.getElementById('player-two');
-    let currentPlayers = createPlayers(playerOne.value, playerTwo.value);
+    
 
-    let currentPlayer = currentPlayers[1];
+    let players = createPlayers('poop', 'pee');
+    let currentPlayer = players[1];
+    console.log('its a me '+players[1].getName());
     const getCurrentPlayer = () => currentPlayer;
 
     const makeTurn = (index, e) => {
@@ -65,8 +56,8 @@ const gameControllerModule = (() => {
         
         if (tempArray[index] === '.') {
 
-            e.target.textContent = getCurrentPlayer().marker;
-            placeMarker(index, getCurrentPlayer().marker);
+            e.target.textContent = getCurrentPlayer().getMarker();
+            placeMarker(index, getCurrentPlayer().getMarker());
             printNewRound();
             checkForWin();
             switchPlayer();  
@@ -87,15 +78,15 @@ const gameControllerModule = (() => {
     }
 
     const switchPlayer = () => {
-        if (getCurrentPlayer() === currentPlayers[1]) {
-            currentPlayer = currentPlayers[0];
+        if (getCurrentPlayer() === players[1]) {
+            currentPlayer = players[0];
         } else {
-            currentPlayer = currentPlayers[1];
+            currentPlayer = players[1];
         }
     }
 
     const printNewRound = () => {
-        console.log(`It's ${getCurrentPlayer().name}'s (${getCurrentPlayer().marker}) turn`);
+        console.log(`It's ${getCurrentPlayer().getName()}'s (${getCurrentPlayer().getMarker()}) turn`);
         console.log(getBoard());
     }
 
@@ -123,28 +114,28 @@ const gameControllerModule = (() => {
         let boardString = getBoard().toString().replace(/\,/g,'');
         
         if (boardString.substring(0,3) === 'XXX' || boardString.substring(0,3) === 'OOO') {
-            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
+            resultDiv.textContent = `${getCurrentPlayer().getName()} Wins!`;
             console.log('win');
         } else if (boardString.substring(3,6) === 'XXX' || boardString.substring(3,6) === 'OOO') {
-            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
+            resultDiv.textContent = `${getCurrentPlayer().getName()} Wins!`;
             console.log('win');
         } else if (boardString.substring(6,9) === 'XXX' || boardString.substring(6,9) === 'OOO') {
-            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
+            resultDiv.textContent = `${getCurrentPlayer().getName()} Wins!`;
             console.log('win');
         } else if (getIndex(boardString, 0, 3, 6) === 'XXX' || getIndex(boardString, 0, 3, 6) === 'OOO') {
-            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
+            resultDiv.textContent = `${getCurrentPlayer().getName()} Wins!`;
             console.log('win');
         } else if (getIndex(boardString, 1, 4, 7) === 'XXX' || getIndex(boardString, 1, 4, 7) === 'OOO') {
-            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
+            resultDiv.textContent = `${getCurrentPlayer().getName()} Wins!`;
             console.log('win');
         } else if (getIndex(boardString, 2, 5, 8) === 'XXX' || getIndex(boardString, 2, 5, 8) === 'OOO') {
-            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
+            resultDiv.textContent = `${getCurrentPlayer().getName()} Wins!`;
             console.log('win');
         } else if (getIndex(boardString, 0, 4, 8) === 'XXX' || getIndex(boardString, 0, 4, 8) === 'OOO') {
-            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;
+            resultDiv.textContent = `${getCurrentPlayer().getName()} Wins!`;
             console.log('win');
         } else if (getIndex(boardString, 2, 4, 6) === 'XXX' || getIndex(boardString, 2, 4, 6) === 'OOO') {
-            resultDiv.textContent = `${getCurrentPlayer().name} Wins!`;            
+            resultDiv.textContent = `${getCurrentPlayer().getName()} Wins!`;            
             console.log('win');
         } else {
             checkFullBoard();
@@ -159,11 +150,13 @@ const screenControllerModule = (() => {
     const game = gameControllerModule;
     const turnDiv = document.querySelector('.turn');
     const boardDiv = document.querySelector('.board');
-    
+    const playerOneDiv = document.getElementById('player-one'); 
+    const playerTwoDiv = document.getElementById('player-two');
     const start = document.querySelector('#start');
     const reset = document.querySelector('#reset');
     
     
+    game.createPlayers(playerOneDiv.value, playerTwoDiv.value);
     // console.log(currentPlayers);
 
 
