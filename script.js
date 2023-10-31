@@ -24,9 +24,7 @@ const playersFactory = (name, marker) => {
     const getName  = () => name;
     const getMarker = () => marker;
 
-    return {getName, getMarker, get getterName(){
-        return name;
-    }};
+    return {getName, getMarker}
 };
 
 // Module to handle the game logic
@@ -52,6 +50,11 @@ const gameControllerModule = (() => {
     let currentPlayer = players[1];
     // Make currentPlayer private
     const getCurrentPlayer = () => currentPlayer;
+
+    const updatePlayers = (newNameOne, newNameTwo) => {
+        players[0] = playersFactory(newNameOne, 'O');
+        players[1] = playersFactory(newNameTwo, 'X');
+    }
 
     // const getPlayers = () => players;
     // Assign board to temp var and compare value of array then place marker
@@ -150,7 +153,7 @@ const gameControllerModule = (() => {
         }
     }
 
-    return {getCurrentPlayer, makeTurn, getBoard, createPlayers, clearBoard};
+    return {getCurrentPlayer, makeTurn, getBoard, createPlayers, clearBoard, updatePlayers};
 
 })();
 
@@ -167,7 +170,7 @@ const screenControllerModule = (() => {
     const start = document.querySelector('#start');
     const reset = document.querySelector('#reset');
 
-    game.createPlayers('test 1', 'test 2');
+    
     // testPlayerOne = testPlayers[0];
     // testPlayerTwo = testPlayers[1];
     // console.log(game.createPlayers());
@@ -194,7 +197,7 @@ const screenControllerModule = (() => {
     // Allow user to click on grid after pressing start
     start.addEventListener('click', function() {
         // game.createPlayers(playerOneDiv.value, playerTwoDiv.value);
-        
+        game.updatePlayers('test 1', 'test 2');
 
         updateScreen();
 
