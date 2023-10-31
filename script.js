@@ -1,5 +1,5 @@
 // Module for the game board to store array of board and place marker
-// "use strict"
+"use strict"
 const gameboardModule = (() => {
     let board = ['.','.','.',
                  '.','.','.',
@@ -34,14 +34,14 @@ const gameControllerModule = (() => {
     let getBoard = gameboardModule.getBoard;
     let placeMarker = gameboardModule.placeMarker;
 
-
+    let players = null;
     
     // Create players with player factory then assign to players array and return
     const createPlayers = (playerOne, playerTwo) => {
         const player1 = playersFactory(playerOne, 'O');
         const player2 = playersFactory(playerTwo, 'X');
 
-        players = [player1, player2];
+        let players = [player1, player2];
         return players;
     }
     
@@ -59,7 +59,7 @@ const gameControllerModule = (() => {
     // const getPlayers = () => players;
     // Assign board to temp var and compare value of array then place marker
     const makeTurn = (index, e) => {
-        tempArray = getBoard();
+        let tempArray = getBoard();
         if (tempArray[index] === '.') {
             // Change where user is clicking to marker
             e.target.textContent = getCurrentPlayer().getMarker();
@@ -170,13 +170,9 @@ const screenControllerModule = (() => {
     const start = document.querySelector('#start');
     const reset = document.querySelector('#reset');
 
-    
-    // testPlayerOne = testPlayers[0];
-    // testPlayerTwo = testPlayers[1];
-    // console.log(game.createPlayers());
-
     // Get board and display while adding data attribute
     const displayBoard = () => {
+        
         const board = game.getBoard();
         // Go through each index of board array and create button with a class and data attribute of current index
         board.forEach(function (value, index) {
@@ -189,16 +185,13 @@ const screenControllerModule = (() => {
 
     // Show who's turn it is
     const updateScreen = () => {
-        // boardDiv.textContent = '';
+        game.updatePlayers(playerOneDiv.value, playerTwoDiv.value);
         const activePlayer = game.getCurrentPlayer();
         turnDiv.textContent = `It's ${activePlayer.getName()}'s (${activePlayer.getMarker()}) turn`;
     }
 
     // Allow user to click on grid after pressing start
     start.addEventListener('click', function() {
-        // game.createPlayers(playerOneDiv.value, playerTwoDiv.value);
-        game.updatePlayers('test 1', 'test 2');
-
         updateScreen();
 
         // Make turn on the clicked grid cell using e.target
@@ -224,13 +217,3 @@ const screenControllerModule = (() => {
     displayBoard();
     
 })();
-
-
-// players enter name
-// click start
-// player turn is displayed
-// cell is clicked
-// player marker is shown in cell
-// board is checked for a win
-// player switches and turn is displayed
-// board checked for win, if win current player is displayed as winner
