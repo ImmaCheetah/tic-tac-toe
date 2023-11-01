@@ -184,8 +184,6 @@ const screenControllerModule = (() => {
                 cell.disabled = true;
             });
         }
-        console.log(document.querySelector('.grid-cell').value);
-        console.log(resultDiv.textContent.includes('!'));
     }
     // Get board and display while adding data attribute
     const displayBoard = () => {
