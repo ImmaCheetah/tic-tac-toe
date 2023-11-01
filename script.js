@@ -156,7 +156,7 @@ const gameControllerModule = (() => {
         }
     }
 
-    return {getCurrentPlayer, makeTurn, getBoard, createPlayers, clearBoard, updatePlayers, resetTurn};
+    return {getCurrentPlayer, makeTurn, getBoard, clearBoard, updatePlayers, resetTurn};
 
 })();
 
@@ -172,8 +172,21 @@ const screenControllerModule = (() => {
     const playerTwoDiv = document.getElementById('player-two');
     const start = document.querySelector('#start');
     const reset = document.querySelector('#reset');
+    const resultDiv = document.querySelector('.result');
     
-    
+    const disableBoard = () => {
+        if (resultDiv.textContent.includes('!')) {
+            // document.querySelector('.board').style.pointerEvents = "none";
+
+            // Go through each grid cell and disable button
+            const indivCells = document.querySelectorAll('.grid-cell');
+            indivCells.forEach((cell) => {
+                cell.disabled = true;
+            });
+        }
+        console.log(document.querySelector('.grid-cell').value);
+        console.log(resultDiv.textContent.includes('!'));
+    }
     // Get board and display while adding data attribute
     const displayBoard = () => {
         
@@ -203,6 +216,7 @@ const screenControllerModule = (() => {
             const selectedGridCell = e.target.dataset.index;
     
             game.makeTurn(selectedGridCell, e);
+            disableBoard();
             updateScreen();
             // console.log(playerOne.value);
         }
@@ -211,7 +225,7 @@ const screenControllerModule = (() => {
 
     // Clear the board
     reset.addEventListener('click', function() {
-        const resultDiv = document.querySelector('.result');
+        
         resultDiv.textContent = '';
         turnDiv.textContent = '';
         boardDiv.textContent = '';
