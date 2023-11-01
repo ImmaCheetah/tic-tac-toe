@@ -76,7 +76,7 @@ const gameControllerModule = (() => {
 
     // Loop through array and replace indexes with '.'
     const clearBoard = () => {
-        tempArray = getBoard();
+        let tempArray = getBoard();
         for (let i = 0; i < tempArray.length; i++) {
             tempArray[i] = '.';
         }
@@ -185,7 +185,7 @@ const screenControllerModule = (() => {
 
     // Show who's turn it is
     const updateScreen = () => {
-        game.updatePlayers(playerOneDiv.value, playerTwoDiv.value);
+        // game.updatePlayers(playerOneDiv.value, playerTwoDiv.value);
         const activePlayer = game.getCurrentPlayer();
         turnDiv.textContent = `It's ${activePlayer.getName()}'s (${activePlayer.getMarker()}) turn`;
     }
