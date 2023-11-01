@@ -1,5 +1,5 @@
-// Module for the game board to store array of board and place marker
 "use strict"
+// Module for the game board to store array of board and place marker
 const gameboardModule = (() => {
     let board = ['.','.','.',
                  '.','.','.',
@@ -56,7 +56,9 @@ const gameControllerModule = (() => {
         players[1] = playersFactory(newNameTwo, 'X');
     }
 
-    // const getPlayers = () => players;
+    const resetTurn = () => {
+        currentPlayer = players[1];
+    };
     // Assign board to temp var and compare value of array then place marker
     const makeTurn = (index, e) => {
         let tempArray = getBoard();
@@ -153,7 +155,7 @@ const gameControllerModule = (() => {
         }
     }
 
-    return {getCurrentPlayer, makeTurn, getBoard, createPlayers, clearBoard, updatePlayers};
+    return {getCurrentPlayer, makeTurn, getBoard, createPlayers, clearBoard, updatePlayers, resetTurn};
 
 })();
 
@@ -161,7 +163,7 @@ const gameControllerModule = (() => {
 const screenControllerModule = (() => {
     // Assign game controller module to var for easier access
     const game = gameControllerModule;
-
+    
     // DOM elements
     const turnDiv = document.querySelector('.turn');
     const boardDiv = document.querySelector('.board');
@@ -169,7 +171,8 @@ const screenControllerModule = (() => {
     const playerTwoDiv = document.getElementById('player-two');
     const start = document.querySelector('#start');
     const reset = document.querySelector('#reset');
-
+    
+    game.updatePlayers(playerOneDiv.value, playerTwoDiv.value);
     // Get board and display while adding data attribute
     const displayBoard = () => {
         
@@ -182,18 +185,18 @@ const screenControllerModule = (() => {
             boardDiv.appendChild(gridCell);
         })
     }
-
+    
     // Show who's turn it is
     const updateScreen = () => {
-        // game.updatePlayers(playerOneDiv.value, playerTwoDiv.value);
         const activePlayer = game.getCurrentPlayer();
         turnDiv.textContent = `It's ${activePlayer.getName()}'s (${activePlayer.getMarker()}) turn`;
     }
-
+    
     // Allow user to click on grid after pressing start
     start.addEventListener('click', function() {
+        
         updateScreen();
-
+        
         // Make turn on the clicked grid cell using e.target
         function clickGridCell(e) {
             const selectedGridCell = e.target.dataset.index;
@@ -208,8 +211,10 @@ const screenControllerModule = (() => {
     // Clear the board
     reset.addEventListener('click', function() {
         // resultDiv.textContent = '';
+        turnDiv.textContent = '';
         boardDiv.textContent = '';
         game.clearBoard();
+        game.resetTurn();
         displayBoard();
     })
     
