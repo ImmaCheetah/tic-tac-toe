@@ -54,6 +54,7 @@ const gameControllerModule = (() => {
     const updatePlayers = (newNameOne, newNameTwo) => {
         players[0] = playersFactory(newNameOne, 'O');
         players[1] = playersFactory(newNameTwo, 'X');
+        currentPlayer = players[1];
     }
 
     const resetTurn = () => {
@@ -214,6 +215,8 @@ const screenControllerModule = (() => {
         resultDiv.textContent = '';
         turnDiv.textContent = '';
         boardDiv.textContent = '';
+        playerOneDiv.textContent = '';
+        playerTwoDiv.textContent = '';
         game.clearBoard();
         game.resetTurn();
         displayBoard();
