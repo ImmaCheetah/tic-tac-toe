@@ -172,7 +172,7 @@ const screenControllerModule = (() => {
     const start = document.querySelector('#start');
     const reset = document.querySelector('#reset');
     
-    game.updatePlayers(playerOneDiv.value, playerTwoDiv.value);
+    
     // Get board and display while adding data attribute
     const displayBoard = () => {
         
@@ -194,7 +194,7 @@ const screenControllerModule = (() => {
     
     // Allow user to click on grid after pressing start
     start.addEventListener('click', function() {
-        
+        game.updatePlayers(playerOneDiv.value, playerTwoDiv.value);
         updateScreen();
         
         // Make turn on the clicked grid cell using e.target
@@ -210,7 +210,8 @@ const screenControllerModule = (() => {
 
     // Clear the board
     reset.addEventListener('click', function() {
-        // resultDiv.textContent = '';
+        const resultDiv = document.querySelector('.result');
+        resultDiv.textContent = '';
         turnDiv.textContent = '';
         boardDiv.textContent = '';
         game.clearBoard();
